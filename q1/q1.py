@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math
 
 df_all = pd.read_csv('retty_gourmet_open_q1.csv')
 
@@ -11,7 +12,6 @@ df_category = df_all['category']
 
 for i in range(len(df_all)):
     if df_category[i] == '餃子':
-        print(df_answer[i])
         latitude = float(df_latitude[i])
         longitude = float(df_longitude[i])
         
@@ -71,7 +71,10 @@ for i in range(len(df_all)):
             x = A_ * (xi2 + np.sum(np.multiply(alpha_array[1:], np.multiply(np.sin(2 * xi2 * np.arange(1, 6)), np.cosh(2 * eta2 * np.arange(1, 6)))))) - S_  # [m]
             y = A_ * (eta2 + np.sum(np.multiply(alpha_array[1:], np.multiply(np.cos(2 * xi2 * np.arange(1, 6)), np.sinh(2 * eta2 * np.arange(1, 6))))))  # [m]
             # return
-            # return x, y  # [m]
+            return x, y  # [m]
             
-        x, y = calc_xy(latitude, longitude, 35.7799264, 139.7524000)
-        print("x,y = ({0},{1})".format(x, y))
+        x, y = calc_xy(latitude, longitude, 35.6721903, 139.7363287)
+        
+        distance = math.sqrt(x ** 2 + y ** 2) / 1000
+        if distance <= 1.5:
+            print(df_answer[i])
