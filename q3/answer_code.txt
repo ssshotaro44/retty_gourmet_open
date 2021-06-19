@@ -1,0 +1,1 @@
+curl -u retty_gourmet_open:aiNeT2ca https://p3hpemjpit.ap-northeast-1.awsapprunner.com/api/restaurants | jq '.[] | if (.area.area_id == "14") then . else empty end  | select(.restaurant_name | contains("珉")) | select(.restaurant_name | contains("店") | not) | select(.restaurant_name | test("[a-z]") | not) | .restaurant_id'
